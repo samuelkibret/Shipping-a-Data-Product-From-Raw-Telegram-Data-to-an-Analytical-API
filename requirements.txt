@@ -1,0 +1,24 @@
+# --- Task 0: Project Setup & Environment Management ---
+python-dotenv # For loading .env files
+tqdm # For progress bars (optional but helpful)
+
+# --- Task 1: Data Scraping and Collection (Extract & Load) ---
+pandas # For data manipulation
+pyarrow # For Parquet file handling (if needed, good general data handling)
+telethon # For Telegram API interaction
+
+# --- Task 2: Data Modeling and Transformation (Transform) ---
+psycopg2-binary # Python PostgreSQL adapter
+dbt-core # Core dbt package
+dbt-postgres # dbt adapter for PostgreSQL
+
+# --- Task 3: Data Enrichment with Object Detection (YOLO) ---
+ultralytics # For YOLOv8
+
+# --- Task 4: Build an Analytical API (FastAPI) ---
+fastapi # Web framework for API
+uvicorn[standard] # ASGI server for FastAPI
+
+# --- Task 5: Pipeline Orchestration (Dagster) ---
+dagster # Core Dagster library
+dagster-webserver # For Dagster UI

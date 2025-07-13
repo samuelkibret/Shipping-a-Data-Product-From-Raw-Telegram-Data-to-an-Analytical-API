@@ -1,0 +1,63 @@
+[0m12:27:32.830114 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001E4D113BE00>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001E4D2517D90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001E4D2517890>]}
+
+
+============================== 12:27:32.847364 | 8ffa082e-e81a-42ec-9468-1accc4375ef3 ==============================
+[0m12:27:32.847364 [info ] [MainThread]: Running with dbt=1.10.4
+[0m12:27:32.848790 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'log_cache_events': 'False', 'write_json': 'True', 'partial_parse': 'True', 'cache_selected_only': 'False', 'profiles_dir': 'C:\\Users\\skibret\\.dbt', 'fail_fast': 'False', 'version_check': 'True', 'log_path': 'logs', 'warn_error': 'None', 'debug': 'False', 'use_colors': 'True', 'use_experimental_parser': 'False', 'empty': 'None', 'quiet': 'False', 'no_print': 'None', 'log_format': 'default', 'introspect': 'True', 'static_parser': 'True', 'invocation_command': 'dbt init my_telegram_dbt_project', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'send_anonymous_usage_stats': 'True'}
+[0m12:27:32.992078 [info ] [MainThread]: Creating dbt configuration folder at C:\Users\skibret\.dbt
+[0m12:27:33.000078 [debug] [MainThread]: Starter project path: C:\Users\skibret\AppData\Local\Programs\Python\Python313\Lib\site-packages\dbt\include\starter_project
+[0m12:27:33.039083 [info ] [MainThread]: 
+Your new dbt project "my_telegram_dbt_project" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m12:27:33.040242 [info ] [MainThread]: Setting up your profile.
+[0m12:30:14.626016 [error] [MainThread]: Encountered an error:
+
+[0m12:30:14.664578 [error] [MainThread]: Traceback (most recent call last):
+  File "C:\Users\skibret\AppData\Local\Programs\Python\Python313\Lib\site-packages\dbt\cli\requires.py", line 161, in wrapper
+    result, success = func(*args, **kwargs)
+                      ~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\skibret\AppData\Local\Programs\Python\Python313\Lib\site-packages\dbt\cli\requires.py", line 111, in wrapper
+    return func(*args, **kwargs)
+  File "C:\Users\skibret\AppData\Local\Programs\Python\Python313\Lib\site-packages\dbt\cli\main.py", line 483, in init
+    results = task.run()
+  File "C:\Users\skibret\AppData\Local\Programs\Python\Python313\Lib\site-packages\dbt\task\init.py", line 346, in run
+    self.setup_profile(profile_name)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\skibret\AppData\Local\Programs\Python\Python313\Lib\site-packages\dbt\task\init.py", line 262, in setup_profile
+    self.create_profile_from_target(adapter, profile_name=profile_name)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\skibret\AppData\Local\Programs\Python\Python313\Lib\site-packages\dbt\task\init.py", line 179, in create_profile_from_target
+    self.create_profile_from_profile_template(profile_template, profile_name)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\skibret\AppData\Local\Programs\Python\Python313\Lib\site-packages\dbt\task\init.py", line 163, in create_profile_from_profile_template
+    target = self.generate_target_from_input(prompts, initial_target)
+  File "C:\Users\skibret\AppData\Local\Programs\Python\Python313\Lib\site-packages\dbt\task\init.py", line 129, in generate_target_from_input
+    target[key] = click.prompt(
+                  ~~~~~~~~~~~~^
+        text, default=default, hide_input=hide_input, type=type
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\skibret\AppData\Local\Programs\Python\Python313\Lib\site-packages\click\termui.py", line 164, in prompt
+    value = prompt_func(prompt)
+  File "C:\Users\skibret\AppData\Local\Programs\Python\Python313\Lib\site-packages\click\termui.py", line 147, in prompt_func
+    raise Abort() from None
+click.exceptions.Abort
+
+[0m12:30:14.667756 [debug] [MainThread]: Command `dbt init` failed at 12:30:14.667457 after 162.02 seconds
+[0m12:30:14.668537 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001E4D25AF100>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001E4D26F7650>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001E4D2587240>]}
+[0m12:30:14.669437 [debug] [MainThread]: Flushing usage events
+[0m12:30:16.216971 [debug] [MainThread]: An error was encountered while trying to flush usage events

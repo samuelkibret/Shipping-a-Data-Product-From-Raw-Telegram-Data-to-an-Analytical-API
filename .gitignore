@@ -1,0 +1,21 @@
+# Python virtual environment
+venv/
+
+# Byte-code files
+*.pyc
+__pycache__/
+
+# IDE specific files (e.g., VS Code, PyCharm)
+.vscode/
+.idea/
+
+# Docker specific files
+.dockerignore
+
+# Sensitive environment variables
+.env
+
+# Data folders
+data/
+processed_data/
+vector_store_fresh_run_temp/ 
