@@ -1,0 +1,14 @@
+# profiles.yml (located inside my_telegram_dbt_project/)
+
+my_telegram_dbt_project: # This must match the 'name' in your dbt_project.yml
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: db # IMPORTANT: This refers to the 'db' service in docker-compose.yml
+      port: 5432
+      user: your_database_user_here # e.g., telegram_user
+      password: your_database_password_here # e.g., MyStrongDBPass123!
+      dbname: your_database_name_here # e.g., telegram_db
+      schema: public # Default schema for dbt's output models
+      threads: 1

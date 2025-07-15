@@ -1,0 +1,8 @@
+2025-07-15 13:54:25,805 - INFO - Successfully connected to PostgreSQL database.
+2025-07-15 13:54:25,876 - INFO - Ensured table raw.raw_telegram_messages exists.
+2025-07-15 13:54:25,994 - INFO - Loading data from: data/raw/telegram_messages/2025-07-13/lobelia4cosmetics/lobelia4cosmetics.json
+2025-07-15 13:54:26,102 - INFO - Inserted/skipped 100 messages from lobelia4cosmetics.json. Actual new inserts: 100
+2025-07-15 13:54:26,128 - INFO - Loading data from: data/raw/telegram_messages/2025-07-13/tikvahpharma/tikvahpharma.json
+2025-07-15 13:54:26,245 - INFO - Inserted/skipped 100 messages from tikvahpharma.json. Actual new inserts: 100
+2025-07-15 13:54:26,256 - INFO - Data loading complete. Total files processed: 2. Total new messages inserted: 200.
+2025-07-15 13:54:26,257 - INFO - Database connection closed.

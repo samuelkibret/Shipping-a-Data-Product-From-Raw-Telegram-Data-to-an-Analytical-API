@@ -21,26 +21,24 @@ services:
 
   # Python Application Service
   app:
-    build: . # Build the image from the Dockerfile in the current directory
+    build: .
     container_name: python_app_week7
-    command: sh -c "python your_main_script.py" # Placeholder command, will be updated for Dagster/FastAPI
+    command: tail -f /dev/null # Keep the container running indefinitely
     volumes:
-      - .:/app # Mount the current project directory into the container's /app
+    - .:/app
     ports:
-      - "8000:8000" # Expose FastAPI port
+    - "8000:8000"
     environment:
-      DB_HOST: db # Hostname for the database (Docker service name)
+      DB_HOST: db
       DB_PORT: 5432
       DB_NAME: ${DB_NAME}
       DB_USER: ${DB_USER}
       DB_PASSWORD: ${DB_PASSWORD}
-      # environment variables from .env
       TELEGRAM_API_ID: ${TELEGRAM_API_ID}
       TELEGRAM_API_HASH: ${TELEGRAM_API_HASH}
-      # ... any other secrets for YOLO, etc.
     depends_on:
       db:
-        condition: service_healthy # Ensure DB is healthy before starting app
+        condition: service_healthy
     # networks: # Optional: if you need custom networks
     #   - my_custom_network
 

@@ -1,28 +1,34 @@
-FROM python:3.10-slim-buster
+# Use an official Python runtime based on a recent stable Debian release (Bookworm)
+FROM python:3.12-slim-bookworm
 
-# Working directory in the container
+# Set the working directory in the container
 WORKDIR /app
 
-# Install system dependencies required by psycopg2-binary (PostgreSQL client libraries)
-# and other potential build tools
+# Prevent Python from writing .pyc files to disc
+ENV PYTHONDONTWRITEBYTECODE 1
+# Ensure stdout/stderr are not buffered
+ENV PYTHONUNBUFFERED 1
+
+# Install system dependencies for Python packages, including a comprehensive set for OpenCV (cv2)
+# These are common dependencies for headless OpenCV operation on Debian-based systems.
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     build-essential \
     libpq-dev \
+    libgl1 \
+    libglib2.0-0 \
+    libsm6 \
+    libxrender1 \
+    libfontconfig1 \
+    libxext6 \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy the requirements.txt file into the container
+# Copy requirements.txt and install Python dependencies
 COPY requirements.txt .
-
-# Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of application code into the container
-# This assumes Python scripts will be in the /app directory
+# Copy the rest of your application code
 COPY . .
 
-# Expose the port FastAPI will run on (default for Uvicorn)
-EXPOSE 8000
-
-# Command to run FastAPI application (this will be overridden by docker-compose usually)
-# CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Command to keep the container running (will be overridden by docker-compose)
+CMD ["tail", "-f", "/dev/null"]

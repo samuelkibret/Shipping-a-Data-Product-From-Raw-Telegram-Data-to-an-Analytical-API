@@ -1,0 +1,121 @@
+# models/schema.yml
+
+version: 2
+
+sources:
+  - name: raw # This is the name of your raw source schema
+    database: "{{ env_var('DB_NAME') }}" # Reference your DB name from env
+    schema: raw # This is the actual schema name in PostgreSQL
+    tables:
+      - name: raw_telegram_messages # This is the raw table name
+        description: "Raw messages scraped from Telegram channels."
+        columns:
+          - name: id
+            description: "Primary key of the raw table."
+            tests:
+              - unique
+              - not_null
+          - name: message_id
+            description: "Original Telegram message ID."
+            tests:
+              - not_null
+          - name: channel_username
+            description: "Username of the Telegram channel."
+            tests:
+              - not_null
+          - name: message_data
+            description: "Full JSONB data of the Telegram message."
+
+models:
+  - name: stg_telegram_messages
+    description: "Staging model for cleaned and lightly transformed Telegram messages."
+    columns:
+      - name: message_id
+        description: "Unique identifier for the Telegram message."
+        tests:
+          - unique
+          - not_null
+      - name: channel_username
+        description: "Username of the Telegram channel."
+      - name: message_text
+        description: "The text content of the message."
+      - name: message_timestamp
+        description: "Timestamp of the message."
+      - name: views_count
+        description: "Number of views on the message."
+      - name: forwards_count
+        description: "Number of forwards of the message."
+      - name: image_path
+        description: "Local path to the downloaded image, if any."
+    tests:
+      # Example of a custom data test (SQL query must return 0 rows to pass)
+      - dbt_utils.expression_is_true:
+          expression: "length(message_text) > 0"
+          name: "message_text_not_empty"
+
+
+  - name: dim_channels
+    description: "Dimension table containing unique Telegram channel information."
+    columns:
+      - name: channel_sk
+        description: "Surrogate key for the channel dimension."
+        tests:
+          - unique
+          - not_null
+      - name: channel_username
+        description: "Unique username of the Telegram channel."
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_dates
+    description: "Dimension table for date information."
+    columns:
+      - name: date_sk
+        description: "Surrogate key for the date dimension (YYYYMMDD)."
+        tests:
+          - unique
+          - not_null
+      - name: date_actual
+        description: "Actual date."
+        tests:
+          - not_null
+      - name: year
+        description: "Year of the date."
+      - name: month
+        description: "Month number of the date."
+      - name: day_of_month
+        description: "Day of the month."
+
+  - name: fct_messages
+    description: "Fact table containing key metrics and foreign keys for Telegram messages."
+    columns:
+      - name: message_id
+        description: "Unique identifier for the Telegram message (primary key)."
+        tests:
+          - unique
+          - not_null
+      - name: message_text
+        description: "The text content of the message."
+      - name: message_timestamp
+        description: "Timestamp of the message."
+      - name: views_count
+        description: "Number of views on the message."
+      - name: forwards_count
+        description: "Number of forwards of the message."
+      - name: has_image
+        description: "Boolean indicating if the message has an associated image."
+      - name: channel_sk
+        description: "Foreign key to the dim_channels table."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_channels')
+              field: channel_sk
+      - name: date_sk
+        description: "Foreign key to the dim_dates table."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_dates')
+              field: date_sk
